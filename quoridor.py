@@ -79,8 +79,6 @@ def afficher_damier_ascii(dico_etat_jeu):
                         print(' ', end='')
         print(' |')
 
-    #il faudra iterer selon les valeurs du dictionnaire ici
-
     #---------- ASCII END ----------
     print('--|------------------------------------- \n  | 1   2   3   4   5   6   7   8   9  ')
 
