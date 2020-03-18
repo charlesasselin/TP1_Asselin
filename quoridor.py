@@ -14,16 +14,19 @@ def afficher_damier_ascii(dico_etat_jeu):
     #---------- MODIFIER DICO ----------
 
     def transformJoueurs():
+        listJoueurs = []
+        for joueur in dico_etat_jeu['joueurs']:
+            listJoueurs.append([(2*joueur['pos'][0])-1, (2*joueur['pos'][1])-1])
 
-        posJoueur1 = dico_etat_jeu['joueurs'][0]['pos']
-        listeJoueur1 = [(posJoueur1[0]*2)-1, (posJoueur1[1]*2)-1]
+    def transformMurVert():
+       listTransformedVert = []
+        for murV in dico_etat_jeu['murs']['verticaux']:
+            transformedMurV = [(2*murV[0])-1, (2*murV[1])-1]
 
-        posJoueur2 = dico_etat_jeu['joueurs'][1]['pos']
-        listeJoueur2 = [(posJoueur1[0] * 2) - 1, (posJoueur1[1] * 2) - 1]
-
-    def transformMurs():
-        mursHorizontaux = dico_etat_jeu['murs'][0]['horizontaux']
-        for murH in mursHorizontaux:
+            extendWall = []
+            for i in range(3):
+                extendWall.append([transformedMurV[0]-1, transformedMurV[1] + i])
+            listTransformedVert.extend(extendWall)
 
 
 
