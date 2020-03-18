@@ -1,15 +1,16 @@
 def afficher_damier_ascii(dico_etat_jeu):
 
     #---------- ASCII START ---------
-    patron = ''
-    ligneStart = ' ----------------------------------- \n'
+    print(' ----------------------------------- \n')
     # --------- OPTIONS ----------
 
     name1 = ' 1 '
     name2 = ' 2 '
     empty = ' . '
-    vertCorridor = '-------'
-    horiCorridor = '| '
+    emptyPair = '   '
+    horiCorridor = '---'
+    horiCorridorPair = '-'
+    vertCorridor = '|'
 
     #---------- MODIFIER DICO ----------
 
@@ -38,28 +39,60 @@ def afficher_damier_ascii(dico_etat_jeu):
             transformedMurH = [(2*murH[0])-1, (2*murH[1])-1]
 
             extendWallHori = []
-            for i in range(7):
-                extendWallHori.append([transformedMurH[0] + i, transformedMurH[0]-1])
+            for i in range(3):
+                extendWallHori.append([transformedMurH[0] + i, transformedMurH[1]-1])
             listTransformedHori.extend(extendWallHori)
         return listTransformedHori
+
     #---------- BOUCLES GRILLE ----------
 
     joueurs = transformJoueurs(dico_etat_jeu)
     mursVerticaux = transformMurVert(dico_etat_jeu)
     mursHorizontaux = transformMurHori(dico_etat_jeu)
-    for i in range(17, 1, -1):
-        for j in range(1, 10):
-            if [i, j] in joueurs:
-                print(joueurs.index([i, j])+1)
 
+    for line in range(17, 0, -1):
+        if line % 2 != 0:
+            print(str((line+1)//2) + ' |', end='')
+        else:
+            print('  |', end='')
+        for col in range(1, 18):
+            if [col, line] in joueurs:
+                print(f' {joueurs.index([col, line])+1} ', end='')
+            elif [col, line] in mursVerticaux:
+                print(vertCorridor, end='')
+            elif [col, line] in mursHorizontaux:
+                if col % 2 == 0:
+                    print(horiCorridorPair, end='')
+                else:
+                    print(horiCorridor, end='')
+            else:
+                if line % 2 == 0:
+                    if col % 2 != 0:
+                        print(emptyPair, end='')
+                    else:
+                        print(' ', end='')
+                else:
 
-
-
+                    if col % 2 != 0:
+                        print(empty, end='')
+                    else:
+                        print(' ', end='')
+        print(' |')
 
     #il faudra iterer selon les valeurs du dictionnaire ici
 
     #---------- ASCII END ----------
-    ligneX = '--|--------------------------------- \n'
-    ligneXValues = '  | 1   2   3   4   5   6   7   8   9  '
+    print('--|------------------------------------- \n  | 1   2   3   4   5   6   7   8   9  ')
 
+dico_etat_jeu = {
+    "joueurs": [
+        {"nom": "idul", "murs": 7, "pos": [5, 5]},
+        {"nom": "automate", "murs": 3, "pos": [8, 6]}
+    ],
+    "murs": {
+        "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
+        "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
+    }
+}
+print(afficher_damier_ascii(dico_etat_jeu))
 
