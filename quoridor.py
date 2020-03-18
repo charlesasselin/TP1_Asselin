@@ -11,11 +11,28 @@ def afficher_damier_ascii(dico_etat_jeu):
     vertCorridor = '-------'
     horiCorridor = '| '
 
+    #---------- MODIFIER DICO ----------
+
+    def transformJoueurs():
+
+        posJoueur1 = dico_etat_jeu['joueurs'][0]['pos']
+        listeJoueur1 = [(posJoueur1[0]*2)-1, (posJoueur1[1]*2)-1]
+
+        posJoueur2 = dico_etat_jeu['joueurs'][1]['pos']
+        listeJoueur2 = [(posJoueur1[0] * 2) - 1, (posJoueur1[1] * 2) - 1]
+
+    def transformMurs():
+        mursHorizontaux = dico_etat_jeu['murs'][0]['horizontaux']
+        for murH in mursHorizontaux:
+
+
+
     #---------- BOUCLES GRILLE ----------
 
-    for i in range(10, 1, -1):
+    for i in range(17, 1, -1):
         for j in range(1, 10):
-            #il faudra iterer selon les valeurs du dictionnaire ici
+
+    #il faudra iterer selon les valeurs du dictionnaire ici
 
     #---------- ASCII END ----------
     ligneX = '--|--------------------------------- \n'
