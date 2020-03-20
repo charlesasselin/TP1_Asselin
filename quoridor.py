@@ -1,3 +1,18 @@
+import argparse
+
+def analyser_commande():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        '-h', '--help', help = 'show this message and exit'
+    )
+
+    parser.add_argument(
+        '-l', '--lister', help= 'Lister les identifiants de vos 20 dernieres parties'
+    )
+
+    return parser.parse_args()
+
 def afficher_damier_ascii(dico_etat_jeu):
 
     #---------- ASCII START ---------
@@ -81,16 +96,4 @@ def afficher_damier_ascii(dico_etat_jeu):
 
     #---------- ASCII END ----------
     print('--|------------------------------------- \n  | 1   2   3   4   5   6   7   8   9  ')
-
-dico_etat_jeu = {
-    "joueurs": [
-        {"nom": "idul", "murs": 7, "pos": [5, 5]},
-        {"nom": "automate", "murs": 3, "pos": [8, 6]}
-    ],
-    "murs": {
-        "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
-        "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
-    }
-}
-print(afficher_damier_ascii(dico_etat_jeu))
 

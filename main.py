@@ -1,15 +1,6 @@
-import argparse
+from api import lister_parties, initialiser_partie, jouer_coup
+from quoridor import afficher_damier_ascii, analyser_commande
 
-
-def analyser_commande():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        '-h', '--help', help = 'show this message and exit'
-    )
-
-    parser.add_argument(
-        '-l', '--lister', help= 'Lister les identifiants de vos 20 dernieres parties'
-    )
-
-    return parser.parse_args()
+if __name__ == "__main__":
+    #implementer ici
+    pass
