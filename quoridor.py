@@ -1,10 +1,9 @@
 import argparse
 
 def analyser_commande():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description = 'Jeu Quoridor - phase 1')
 
-    parser.add_argument(
-        '-h', '--help', help = 'show this message and exit'
+    parser.add_argument('idul', help= 'IDUL du joueur'
     )
 
     parser.add_argument(

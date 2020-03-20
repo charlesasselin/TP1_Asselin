@@ -1,11 +1,6 @@
-import requests
-
 url_base = 'https://python.gel.ulaval.ca/quoridor/api'
 
 def lister_parties(idul):
-
-
-
     rep = requests.get(f'{url_base}/lister/', params={'idul': idul})
     if rep.status_code == 200:
         # la requête s'est déroulée normalement; décoder le JSON
