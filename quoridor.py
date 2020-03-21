@@ -1,68 +1,66 @@
 import argparse
 
+
 def analyser_commande():
-    parser = argparse.ArgumentParser(description = 'Jeu Quoridor - phase 1')
-
-    parser.add_argument('idul', help= 'IDUL du joueur'
-    )
-
+    parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
+    parser.add_argument('idul', help='IDUL du joueur')
     parser.add_argument(
-        '-l', '--lister', help= 'Lister les identifiants de vos 20 dernieres parties'
+        '-l', '--lister', help='Lister les identifiants de vos 20 dernieres parties'
     )
 
     return parser.parse_args()
 
+
 def afficher_damier_ascii(dico_etat_jeu):
 
-    #---------- ASCII START ---------
+    # ---------- ASCII START ---------
+
+    print(f'Légende: 1={dico_etat_jeu["joueurs"][0]["nom"]}, 2=automate')
     print(' ----------------------------------- \n')
+
     # --------- OPTIONS ----------
 
-    name1 = ' 1 '
-    name2 = ' 2 '
     empty = ' . '
-    emptyPair = '   '
-    horiCorridor = '---'
-    horiCorridorPair = '-'
-    vertCorridor = '|'
+    empty_pair = '   '
+    hori_corridor = '---'
+    hori_corridor_pair = '-'
+    vert_corridor = '|'
 
-    #---------- MODIFIER DICO ----------
+    # ---------- MODIFIER DICO ----------
 
-    def transformJoueurs(dico_etat_jeu):
-        listJoueurs = []
+    def transform_joueurs(dico_etat_jeu):
+        list_joueurs = []
         for joueur in dico_etat_jeu['joueurs']:
-            listJoueurs.append([(2*joueur['pos'][0])-1, (2*joueur['pos'][1])-1])
-        return listJoueurs
+            list_joueurs.append([(2*joueur['pos'][0])-1, (2*joueur['pos'][1])-1])
+        return list_joueurs
 
-    def transformMurVert(dico_etat_jeu):
-        listTransformedVert = []
-        for murV in dico_etat_jeu['murs']['verticaux']:
-            transformedMurV = [(2*murV[0])-1, (2*murV[1])-1]
+    def transform_mur_vert(dico_etat_jeu):
+        list_transformed_vert = []
+        for mur_v in dico_etat_jeu['murs']['verticaux']:
+            transformed_mur_v = [(2*mur_v[0])-1, (2*mur_v[1])-1]
 
-            extendWallVert = []
+            extend_wall_vert = []
             for i in range(3):
-                extendWallVert.append([transformedMurV[0]-1, transformedMurV[1] + i])
-            listTransformedVert.extend(extendWallVert)
+                extend_wall_vert.append([transformed_mur_v[0]-1, transformed_mur_v[1] + i])
+            list_transformed_vert.extend(extend_wall_vert)
 
-        return listTransformedVert
+        return list_transformed_vert
 
-
-    def transformMurHori(dico_etat_jeu):
-        listTransformedHori = []
-        for murH in dico_etat_jeu['murs']['horizontaux']:
-            transformedMurH = [(2*murH[0])-1, (2*murH[1])-1]
-
-            extendWallHori = []
+    def transform_mur_hori(dico_etat_jeu):
+        list_transformed_hori = []
+        for mur_h in dico_etat_jeu['murs']['horizontaux']:
+            transformed_mur_h = [(2*mur_h[0])-1, (2*mur_h[1])-1]
+            extend_wall_hori = []
             for i in range(3):
-                extendWallHori.append([transformedMurH[0] + i, transformedMurH[1]-1])
-            listTransformedHori.extend(extendWallHori)
-        return listTransformedHori
+                extend_wall_hori.append([transformed_mur_h[0] + i, transformed_mur_h[1]-1])
+            list_transformed_hori.extend(extend_wall_hori)
+        return list_transformed_hori
 
-    #---------- BOUCLES GRILLE ----------
+    # ---------- BOUCLES GRILLE ----------
 
-    joueurs = transformJoueurs(dico_etat_jeu)
-    mursVerticaux = transformMurVert(dico_etat_jeu)
-    mursHorizontaux = transformMurHori(dico_etat_jeu)
+    joueurs = transform_joueurs(dico_etat_jeu)
+    murs_verticaux = transform_mur_vert(dico_etat_jeu)
+    murs_horizontaux = transform_mur_hori(dico_etat_jeu)
 
     for line in range(17, 0, -1):
         if line % 2 != 0:
@@ -72,17 +70,17 @@ def afficher_damier_ascii(dico_etat_jeu):
         for col in range(1, 18):
             if [col, line] in joueurs:
                 print(f' {joueurs.index([col, line])+1} ', end='')
-            elif [col, line] in mursVerticaux:
-                print(vertCorridor, end='')
-            elif [col, line] in mursHorizontaux:
+            elif [col, line] in murs_verticaux:
+                print(vert_corridor, end='')
+            elif [col, line] in murs_horizontaux:
                 if col % 2 == 0:
-                    print(horiCorridorPair, end='')
+                    print(hori_corridor_pair, end='')
                 else:
-                    print(horiCorridor, end='')
+                    print(hori_corridor, end='')
             else:
                 if line % 2 == 0:
                     if col % 2 != 0:
-                        print(emptyPair, end='')
+                        print(empty_pair, end='')
                     else:
                         print(' ', end='')
                 else:
@@ -93,6 +91,5 @@ def afficher_damier_ascii(dico_etat_jeu):
                         print(' ', end='')
         print(' |')
 
-    #---------- ASCII END ----------
+    # ---------- ASCII END ----------
     print('--|------------------------------------- \n  | 1   2   3   4   5   6   7   8   9  ')
-
