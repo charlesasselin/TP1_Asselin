@@ -11,14 +11,13 @@ def lister_parties(idul):
     raise RuntimeError(f"Le GET sur {url_base + 'lister'} a produit le code d'erreur {rep.status_code}.")
 
 
+id_partie = None
 def initialiser_partie(idul):
     rep = requests.post(f'{url_base}/initialiser/', data={'idul': idul})
     dico = rep.json()
-    globals(id_partie = dico['id'])
     if rep.status_code != 200:
         raise RuntimeError(f"Le GET sur {url_base + 'initialiser'} a produit le code d'erreur {rep.status_code}.")
     return dico
-
 
 def jouer_coup(id_partie, type_coup, position):
     rep = requests.post(f'{url_base}/jouer/')
@@ -28,3 +27,6 @@ def jouer_coup(id_partie, type_coup, position):
     if dico.get('message'):
         raise RuntimeError(f"Le GET sur {url_base + 'jouer'} a produit le code d'erreur {rep.status_code}.")
     return dico['état']
+
+# Cette section est pour tester l'état des fonction
+print(initialiser_partie('chass38'))

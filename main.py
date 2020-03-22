@@ -19,4 +19,18 @@ if __name__ == "__main__":
     game_completed = False
 
     while game_completed is False:
-        # do game logic here
+        afficher_damier_ascii(dico_etat_jeu)
+        print('Types de coups disponibles: \n - D: Deplacement \n - MH: Mur Horizontal \n - MV: Mur Vertical \n\n')
+
+        type_coup = input('Choisissez votre type de coup (D, MH ou MV)')
+        print('Vous avez effectué le coup ' + type_coup)
+
+        ligne = input("Definissez la ligne de votre coup")
+        print('Vous avez entré la ligne ' + ligne)
+
+        colonne = input('Definissez la colonne de votre coup')
+        print('Vous avez entré la colonne ' + colonne)
+
+        position = [ligne, colonne]
+        id_partie = initialiser_partie(parsed_args)[id]
+        jouer_coup(id_partie, type_coup, position)
