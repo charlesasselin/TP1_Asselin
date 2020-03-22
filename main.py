@@ -14,8 +14,8 @@ dico_etat_jeu = {
 
 if __name__ == "__main__":
     parsed_args = analyser_commande()
-    initialiser_partie(parsed_args)
-    lister_parties(parsed_args)
+    game_dict = initialiser_partie(parsed_args.idul)
+    lister_parties(parsed_args.idul)
     game_completed = False
 
     while game_completed is False:
@@ -32,5 +32,5 @@ if __name__ == "__main__":
         print('Vous avez entré la colonne ' + colonne)
 
         position = [ligne, colonne]
-        id_partie = initialiser_partie(parsed_args)[id]
+        id_partie = game_dict['id']
         jouer_coup(id_partie, type_coup, position)
