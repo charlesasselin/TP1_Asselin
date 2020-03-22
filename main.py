@@ -1,25 +1,15 @@
 from api import lister_parties, initialiser_partie, jouer_coup
 from quoridor import afficher_damier_ascii, analyser_commande
 
-dico_etat_jeu = {
-    "joueurs": [
-        {"nom": "idul", "murs": 7, "pos": [5, 5]},
-        {"nom": "automate", "murs": 3, "pos": [8, 6]}
-    ],
-    "murs": {
-        "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
-        "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
-    }
-}
-
 if __name__ == "__main__":
     parsed_args = analyser_commande()
-    game_dict = initialiser_partie(parsed_args.idul)
+    game_idul = initialiser_partie(parsed_args.idul)
+    game_state = game_idul['état']
     lister_parties(parsed_args.idul)
     game_completed = False
 
     while game_completed is False:
-        afficher_damier_ascii(dico_etat_jeu)
+        afficher_damier_ascii(game_state)
         print('Types de coups disponibles: \n - D: Deplacement \n - MH: Mur Horizontal \n - MV: Mur Vertical \n\n')
 
         type_coup = input('Choisissez votre type de coup (D, MH ou MV)')
@@ -32,5 +22,5 @@ if __name__ == "__main__":
         print('Vous avez entré la colonne ' + colonne)
 
         position = [ligne, colonne]
-        id_partie = game_dict['id']
+        id_partie = game_idul['id']
         jouer_coup(id_partie, type_coup, position)

@@ -15,8 +15,8 @@ def afficher_damier_ascii(dico_etat_jeu):
 
     # ---------- ASCII START ---------
 
-    print(f'Légende: 1={dico_etat_jeu["joueurs"][0]["nom"]}, 2=automate')
-    print(' ----------------------------------- \n')
+    print(f'Légende: 1={analyser_commande().idul}, 2=automate')
+    print('   ----------------------------------- ')
 
     # --------- OPTIONS ----------
 
@@ -38,12 +38,10 @@ def afficher_damier_ascii(dico_etat_jeu):
         list_transformed_vert = []
         for mur_v in dico_etat_jeu['murs']['verticaux']:
             transformed_mur_v = [(2*mur_v[0])-1, (2*mur_v[1])-1]
-
             extend_wall_vert = []
             for i in range(3):
                 extend_wall_vert.append([transformed_mur_v[0]-1, transformed_mur_v[1] + i])
             list_transformed_vert.extend(extend_wall_vert)
-
         return list_transformed_vert
 
     def transform_mur_hori(dico_etat_jeu):
