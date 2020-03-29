@@ -44,7 +44,6 @@ def jouer_coup(id_partie, type_coup, position):
             'pos': position
         }
     )
-
     dico = rep.json()
     if 'gagnant' in dico:
         raise StopIteration(f'Le gagnant est {dico["gagnant"]}')
